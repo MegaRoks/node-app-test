@@ -20,7 +20,7 @@ router.post('/upload', upload, async (req, res) => {
         const file = new File(filename, path, userId, urlCode, createDate);
         const { file_id } = (await db.query(file.addFile())).rows[0];
         return res.status(200).json({
-            message: `File named ${filename} uploaded`,
+            message: `File named as ${filename} has been uploaded`,
             file_id,
             shortUrl,
         });
