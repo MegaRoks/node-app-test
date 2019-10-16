@@ -12,16 +12,15 @@ const router = express.Router();
 // handles url http://localhost:8081/api/files/upload/
 router.post('/upload', upload, async (req, res) => {
     try {
-        const { userId } = await getDecodeToken(req.headers.token);
+        const { userId } = getDecodeToken(req.headers.token);
         const createDate = moment().format();
-        const fileName = req.file.filename;
-        const filePath = req.file.path;
+        const { filename, path } = req.file;
         const urlCode = shortid.generate();
         const shortUrl = `${req.protocol}://${req.get('host')}/${urlCode}`;
-        const file = new File(fileName, filePath, userId, urlCode, createDate);
+        const file = new File(filename, path, userId, urlCode, createDate);
         const { file_id } = (await db.query(file.addFile())).rows[0];
         return res.status(200).json({
-            message: `File named ${fileName} uploaded`,
+            message: `File named ${filename} uploaded`,
             file_id,
             shortUrl,
         });

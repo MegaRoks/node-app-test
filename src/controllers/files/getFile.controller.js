@@ -8,8 +8,8 @@ const router = express.Router();
 // handles url http://localhost:8081/api/files/:url_code/
 router.get('/:url_code', async (req, res) => {
     try {
-        const urlCode = req.params.url_code;
-        const downloadFile = new DownloadFile(urlCode);
+        const { url_code } = req.params;
+        const downloadFile = new DownloadFile(url_code);
         const filesDitails = (await db.query(downloadFile.getFileByUrlCode())).rows[0];
         return res.status(200).json({
             filesDitails,

@@ -17,6 +17,7 @@ router.use('/users', apiSingUp);
 router.use('/users', apiSingIn);
 router.use('/files', apiAddFiles);
 router.use('/files', apiListFile);
+router.use('/files', apiGetFile);
 router.use('/files', apiDownloadFile);
 
 module.exports = router;

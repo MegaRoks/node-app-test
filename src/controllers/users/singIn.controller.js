@@ -31,8 +31,7 @@ router.post('/signin', validatorSignIn, async (req, res) => {
         if (errors[0]) {
             throw new Error(errors[0].msg);
         }
-        const userEmail = req.body.userEmail;
-        const userPassword = req.body.userPassword;
+        const { userEmail, userPassword } = req.body;
         const singIn = new SingIn(userEmail);
         const user = (await db.query(singIn.getUserByEmail())).rows[0];
         if (!user) {

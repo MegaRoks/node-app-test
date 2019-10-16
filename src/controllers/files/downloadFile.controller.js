@@ -5,14 +5,13 @@ const DownloadFile = require('./../../modules/file/downloadFile.model');
 
 const router = express.Router();
 
-// handles url http://localhost:8081/api/files/:url_code//:name_file
-router.get('/download/:name_file', async (req, res) => {
+// handles url http://localhost:8081/api/files/:url_code/:name_file
+router.get('/:url_code/:name_file', async (req, res) => {
     try {
-        const nameFile = req.params.name_file;
-        const urlCode = req.params.url_code;
-        const downloadFile = new downloadFile(urlCode);
+        const { name_file, url_code } = req.params;
+        const downloadFile = new downloadFile(url_code);
         db.query(downloadFile.updateCountDownload());
-        const file = `${__dirname}/../../../storage/${nameFile}`;
+        const file = `${__dirname}/../../../storage/${name_file}`;
         res.download(file);
     } catch (err) {
         return res.status(422).json({

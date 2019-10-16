@@ -48,10 +48,7 @@ router.post('/signup', validatorSignUp, async (req, res) => {
         if (errors[0]) {
             throw new Error(errors[0].msg);
         }
-        const firstName = req.body.firstName;
-        const lastName = req.body.lastName;
-        const userEmail = req.body.userEmail;
-        const userPassword = req.body.userPassword;
+        const { firstName, lastName, userEmail, userPassword } = req.body;
         const salt = +process.env.SALT;
         const password = await bcrypt.hash(userPassword, salt);
         const createDate = moment().format();
