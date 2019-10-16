@@ -1,0 +1,32 @@
+{
+    "name": "app-test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "dependencies": {
+        "bcrypt": "^3.0.6",
+        "body-parser": "^1.19.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-validator": "^6.2.0",
+        "jsonwebtoken": "^8.5.1",
+        "moment": "^2.24.0",
+        "pg": "^7.12.1"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.4"
+    },
+    "scripts": {
+        "start": "nodemon --inspect src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MegaRoks/node-app-test.git"
+    },
+    "author": "Maxim Kamenev",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/MegaRoks/node-app-test/issues"
+    },
+    "homepage": "https://github.com/MegaRoks/node-app-test#readme"
+}
