@@ -22,6 +22,5 @@ CREATE TABLE files(
     user_id                             INTEGER NOT NULL REFERENCES users ON DELETE CASCADE,
     url_code                            VARCHAR(40) NOT NULL,
     count_downloads                     INTEGER NOT NULL DEFAULT 0,
-    short_url                           VARCHAR(220) NOT NULL,
     create_date                         TIMESTAMP NOT NULL
 );

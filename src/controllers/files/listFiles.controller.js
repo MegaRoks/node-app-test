@@ -1,8 +1,8 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 
-const db = require('./../../db');
-const ListFile = require('./../../modules/file/list.model');
+const db = require('../../db');
+const ListFile = require('../../modules/file/list.model');
 
 const router = express.Router();
 

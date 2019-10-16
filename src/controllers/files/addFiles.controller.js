@@ -3,9 +3,9 @@ const moment = require('moment');
 const jwt = require('jsonwebtoken');
 const shortid = require('shortid');
 
-const db = require('./../../db');
-const File = require('./../../modules/file/File.model');
-const upload = require('./../../config/multer.config');
+const db = require('../../db');
+const File = require('../../modules/file/addFile.model');
+const upload = require('../../config/multer.config');
 
 const router = express.Router();
 
@@ -18,7 +18,7 @@ router.post('/upload', upload, async (req, res) => {
         const filePath = req.file.path;
         const urlCode = shortid.generate();
         const shortUrl = `${req.protocol}://${req.get('host')}/${urlCode}`;
-        const file = new File(fileName, filePath, userId, urlCode, shortUrl, createDate);
+        const file = new File(fileName, filePath, userId, urlCode, createDate);
         const { file_id } = (await db.query(file.addFile())).rows[0];
         return res.status(200).json({
             message: `File named ${fileName} uploaded`,
