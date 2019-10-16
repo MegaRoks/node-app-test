@@ -17,10 +17,11 @@ CREATE TABLE users(
 DROP TABLE IF EXISTS files;
 CREATE TABLE files(
     file_id 						    SERIAL PRIMARY KEY, 
-    first_name                          VARCHAR(220) NOT NULL, 
+    file_name                           VARCHAR(220) NOT NULL, 
     file_path                           VARCHAR(220) NOT NULL, 
     user_id                             INTEGER NOT NULL REFERENCES users ON DELETE CASCADE,
     url_code                            VARCHAR(40) NOT NULL,
     count_downloads                     INTEGER NOT NULL DEFAULT 0,
+    short_url                           VARCHAR(220) NOT NULL,
     create_date                         TIMESTAMP NOT NULL
 );

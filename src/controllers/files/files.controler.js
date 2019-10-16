@@ -17,9 +17,9 @@ router.post('/upload', upload, async (req, res) => {
         const fileName = req.file.filename;
         const filePath = req.file.path;
         const urlCode = shortid.generate();
-        const file = new File(fileName, filePath, userId, urlCode, createDate);
-        const { file_id } = (await db.query(file.addFile())).rows[0];
         const shortUrl = `${req.protocol}://${req.get('host')}/${urlCode}`;
+        const file = new File(fileName, filePath, userId, urlCode, shortUrl, createDate);
+        const { file_id } = (await db.query(file.addFile())).rows[0];
         return res.status(200).json({
             message: `File named ${fileName} uploaded`,
             file_id,
