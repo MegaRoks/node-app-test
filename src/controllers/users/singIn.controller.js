@@ -45,7 +45,7 @@ router.post('/signin', validatorSignIn, async (req, res) => {
         const JWTToken = await getJWT(user);
         return res.status(200).json({
             success: 'Welcome to my app',
-            userToken: JWTToken,
+            token: JWTToken,
             userId: user.user_id,
         });
     } catch (err) {

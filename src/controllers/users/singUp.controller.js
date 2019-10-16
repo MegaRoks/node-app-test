@@ -48,7 +48,7 @@ router.post('/signup', validatorSignUp, async (req, res) => {
         if (errors[0]) {
             throw new Error(errors[0].msg);
         }
-        const firstName = +req.body.firstName;
+        const firstName = req.body.firstName;
         const lastName = req.body.lastName;
         const userEmail = req.body.userEmail;
         const userPassword = req.body.userPassword;

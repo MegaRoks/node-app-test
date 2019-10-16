@@ -1,4 +1,10 @@
 const express = require('express');
+const moment = require('moment');
+const jwt = require('jsonwebtoken');
+const shortid = require('shortid');
+
+const db = require('./../../db');
+const File = require('./../../modules/file/File.model');
 const upload = require('./../../config/multer.config');
 
 const router = express.Router();
@@ -6,7 +12,19 @@ const router = express.Router();
 // handles url http://localhost:8081/api/files/upload/
 router.post('/upload', upload, async (req, res) => {
     try {
-        res.send(req.file);
+        const { userId } = await getDecodeToken(req.headers.token);
+        const createDate = moment().format();
+        const fileName = req.file.filename;
+        const filePath = req.file.path;
+        const urlCode = shortid.generate();
+        const file = new File(fileName, filePath, userId, urlCode, createDate);
+        const { file_id } = (await db.query(file.addFile())).rows[0];
+        const shortUrl = `${req.protocol}://${req.get('host')}/${urlCode}`;
+        return res.status(200).json({
+            message: `File named ${fileName} uploaded`,
+            file_id,
+            shortUrl,
+        });
     } catch (err) {
         return res.status(422).json({
             err: err.message,
@@ -21,3 +39,8 @@ router.use((err, req, res, next) => {
 });
 
 module.exports = router;
+
+function getDecodeToken(token) {
+    const secret = process.env.SECRET;
+    return jwt.verify(token, secret);
+}
