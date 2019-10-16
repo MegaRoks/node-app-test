@@ -10,7 +10,7 @@ const apiDownloadFile = require('./../controllers/files/downloadFile.controller'
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.send('This API is working');
+    res.send({message: 'This API is working'});
 });
 
 router.use('/users', apiSingUp);

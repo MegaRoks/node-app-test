@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-    res.send('Hello From Express');
+    res.send({message: 'Hello From Express'});
 });
 
 app.use('/api', apiRoutes);
