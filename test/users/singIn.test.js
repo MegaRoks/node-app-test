@@ -2,6 +2,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 
 const server = require('../../src/index');
+const utils = require('./../tool/utils');
 
 const expect = chai.expect;
 
@@ -9,7 +10,7 @@ chai.use(chaiHttp);
 
 describe('Sing In', () => {
     describe('POST /api/users/signin/', () => {
-        it(`Should receive an error message that the user email is required`, done => {
+        it('Should receive an error message that the user email is required', done => {
             chai.request(server)
                 .post('/api/users/signin/')
                 .send({ userPassword: '1234556' })
@@ -21,7 +22,7 @@ describe('Sing In', () => {
                 });
         });
 
-        it(`Should receive an error message that invalid email address`, done => {
+        it('Should receive an error message that invalid email address', done => {
             chai.request(server)
                 .post('/api/users/signin/')
                 .send({ userEmail: 'MegaRoks.ru' })
@@ -34,7 +35,7 @@ describe('Sing In', () => {
                 });
         });
 
-        it(`Should receive an error message that the user password is required`, done => {
+        it('Should receive an error message that the user password is required', done => {
             chai.request(server)
                 .post('/api/users/signin/')
                 .send({ userEmail: 'MegaRoks@ya.ru' })
@@ -46,7 +47,7 @@ describe('Sing In', () => {
                 });
         });
 
-        it(`Should receive an error message that the user password is too short`, done => {
+        it('Should receive an error message that the user password is too short', done => {
             chai.request(server)
                 .post('/api/users/signin/')
                 .send({ userEmail: 'MegaRoks@ya.ru' })
@@ -59,7 +60,7 @@ describe('Sing In', () => {
                 });
         });
 
-        it(`User must login`, done => {
+        it('User must login', done => {
             chai.request(server)
                 .post('/api/users/signin/')
                 .send({ userEmail: 'MegaRoks@ya.ru' })
@@ -73,6 +74,7 @@ describe('Sing In', () => {
                     expect(res.body.token).to.be.an('string');
                     expect(res.body).have.property('token');
                     expect(res.body.userId).to.be.an('number');
+                    utils.setuserToken(res.body.token);
                     done();
                 });
         });

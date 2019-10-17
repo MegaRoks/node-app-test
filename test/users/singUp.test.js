@@ -14,7 +14,7 @@ describe('Sing Up', () => {
     });
 
     describe('POST /api/users/signup/', () => {
-        it(`Should receive an error message that the first name is required`, done => {
+        it('Should receive an error message that the first name is required', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ lastName: 'Kamenev' })
@@ -28,7 +28,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should receive an error message that the first name is too short`, done => {
+        it('Should receive an error message that the first name is too short', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'Ma' })
@@ -45,7 +45,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should receive an error message that the first name is too long`, done => {
+        it('Should receive an error message that the first name is too long', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'MaximMaximMaximMaxim' })
@@ -62,7 +62,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should receive an error message that the last name is too short`, done => {
+        it('Should receive an error message that the last name is too short', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'Maxim' })
@@ -79,7 +79,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should receive an error message that the last name is too long`, done => {
+        it('Should receive an error message that the last name is too long', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'Maxim' })
@@ -96,7 +96,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should receive an error message that the last name is required`, done => {
+        it('Should receive an error message that the last name is required', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'Maxim' })
@@ -110,7 +110,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should get an error that the password is too short`, done => {
+        it('Should get an error that the password is too short', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'Maxim' })
@@ -125,7 +125,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should receive an error message that the user email is required`, done => {
+        it('Should receive an error message that the user email is required', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'Maxim' })
@@ -139,7 +139,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should receive an error message that invalid email address`, done => {
+        it('Should receive an error message that invalid email address', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'Maxim' })
@@ -154,7 +154,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should receive an error message that the user password is required`, done => {
+        it('Should receive an error message that the user password is required', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'Maxim' })
@@ -168,7 +168,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should receive an error message that the user password is too short`, done => {
+        it('Should receive an error message that the user password is too short', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'Maxim' })
@@ -183,7 +183,7 @@ describe('Sing Up', () => {
                 });
         });
 
-        it(`Should new user register`, done => {
+        it('Should new user register', done => {
             chai.request(server)
                 .post('/api/users/signup/')
                 .send({ firstName: 'Maxim' })
