@@ -9,7 +9,7 @@ const upload = require('../../config/multer.config');
 
 const router = express.Router();
 
-// handles url http://localhost:8081/api/file/add/
+// handles url http://localhost:8081/file/add/
 router.post('/add', upload, async (req, res) => {
     try {
         const { userId } = getDecodedToken(req.headers.token);
