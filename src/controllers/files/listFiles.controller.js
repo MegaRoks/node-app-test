@@ -6,10 +6,10 @@ const ListFile = require('../../modules/file/list.model');
 
 const router = express.Router();
 
-// handles url http://localhost:8081/api/files/list/
+// handles url http://localhost:8081/files/list/
 router.get('/list', async (req, res) => {
     try {
-        const { userId } = await getDecodeToken(req.headers.token);
+        const { userId } = await getDecodedToken(req.headers.token);
         const listFile = new ListFile(userId);
         const filesList = (await db.query(listFile.getFilesByUserID())).rows;
         return res.status(200).json({
@@ -24,7 +24,7 @@ router.get('/list', async (req, res) => {
 
 module.exports = router;
 
-function getDecodeToken(token) {
+function getDecodedToken(token) {
     const secret = process.env.SECRET;
     return jwt.verify(token, secret);
 }

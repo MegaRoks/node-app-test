@@ -9,10 +9,10 @@ const upload = require('../../config/multer.config');
 
 const router = express.Router();
 
-// handles url http://localhost:8081/api/files/upload/
-router.post('/upload', upload, async (req, res) => {
+// handles url http://localhost:8081/api/file/add/
+router.post('/add', upload, async (req, res) => {
     try {
-        const { userId } = getDecodeToken(req.headers.token);
+        const { userId } = getDecodedToken(req.headers.token);
         const createDate = moment().format();
         const { filename, path } = req.file;
         const urlCode = shortid.generate();
@@ -39,7 +39,7 @@ router.use((err, req, res, next) => {
 
 module.exports = router;
 
-function getDecodeToken(token) {
+function getDecodedToken(token) {
     const secret = process.env.SECRET;
     return jwt.verify(token, secret);
 }

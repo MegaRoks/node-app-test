@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv').config();
 
-const apiRoutes = require('./routes');
-
+const apiRoutes = require('./routes/user.router');
+const apiFiles = require('./routes/file.router');
 const app = express();
 const server = http.createServer(app);
 
@@ -16,11 +16,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-    res.send({message: 'Hello From Express'});
-});
-
 app.use('/api', apiRoutes);
+app.use('/', apiFiles);
 
 server.listen(port);
 

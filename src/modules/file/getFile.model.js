@@ -4,8 +4,12 @@ class DownloadFile {
     }
 
     getFileByUrlCode() {
-        const sql = `SELECT F.FILE_ID, F.FILE_NAME, F.FILE_PATH, F.USER_ID, F.URL_CODE, COUNT_DOWNLOADS, F.SHORT_URL, F.CREATE_DATE 
-            FROM FILES AS F WHERE F.URL_CODE = '${this.urlCode}'`;
+        const sql = `SELECT F.FILE_NAME FROM FILES AS F WHERE F.URL_CODE = '${this.urlCode}'`;
+        return sql;
+    }
+
+    updateCountDownload() {
+        const sql = `UPDATE FILES SET COUNT_DOWNLOADS = COUNT_DOWNLOADS + 1 WHERE URL_CODE = '${this.usrCode}'`;
         return sql;
     }
 }
