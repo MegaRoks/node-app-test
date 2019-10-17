@@ -11,7 +11,7 @@ const router = express.Router();
 const validatorSignUp = [
     check('firstName')
         .exists()
-        .withMessage('User password is required field')
+        .withMessage('First name is required field')
         .isLength({
             min: 3,
             max: 15,
@@ -19,7 +19,7 @@ const validatorSignUp = [
         .withMessage('First name must be at no less 3 characters and no more than 15 characters'),
     check('lastName')
         .exists()
-        .withMessage('User password is required field')
+        .withMessage('Last name is required field')
         .isLength({
             min: 3,
             max: 15,

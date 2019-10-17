@@ -9,9 +9,8 @@ chai.use(chaiHttp);
 
 describe('Index', () => {
     describe('GET /api/', () => {
-        it(`Should return message about work page`, (done) => {
-            chai
-                .request(server)
+        it(`Should return message about work page`, done => {
+            chai.request(server)
                 .get('/api/')
                 .end((err, res) => {
                     expect(res).have.status(200);
