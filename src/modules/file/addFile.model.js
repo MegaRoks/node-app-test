@@ -12,6 +12,11 @@ class File {
             '${this.fileName}', '${this.filePath}', '${this.userId}',  '${this.urlCode}', '${this.createDate}') RETURNING FILE_ID`;
         return sql;
     }
+
+    getFileByFileName() {
+        const sql = `SELECT EXISTS(SELECT F.FILE_ID FROM FILES AS F WHERE F.FILE_NAME = '${this.fileName}') AS FILE_EXISTS`;
+        return sql;
+    }
 }
 
 module.exports = File;

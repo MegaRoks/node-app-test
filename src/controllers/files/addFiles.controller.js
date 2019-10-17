@@ -18,6 +18,10 @@ router.post('/add', upload, async (req, res) => {
         const urlCode = shortid.generate();
         const shortUrl = `${req.protocol}://${req.get('host')}/${urlCode}`;
         const file = new File(filename, path, userId, urlCode, createDate);
+        const { file_exists } = (await db.query(file.getFileByFileName())).rows[0];
+        if (file_exists) {
+            throw new Error('A file with the same name already exists.');
+        }
         const { file_id } = (await db.query(file.addFile())).rows[0];
         return res.status(200).json({
             message: `File named as ${filename} has been uploaded`,
