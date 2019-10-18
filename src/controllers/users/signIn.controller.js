@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
+
 const db = require('./../../db');
 const SignIn = require('../../modules/user/SignIn.model');
 
@@ -63,7 +64,7 @@ function getJWT(user) {
         {
             userId: user.user_id,
             userEmail: user.user_email,
-            firstNme: user.first_name,
+            firstName: user.first_name,
             lastName: user.last_name,
         },
         secret,

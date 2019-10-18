@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 const moment = require('moment');
 
@@ -58,8 +59,11 @@ router.post('/signup', validatorSignUp, async (req, res) => {
             throw new Error('A user with that email address already exists.');
         }
         const { user_id } = (await db.query(signUp.addUser())).rows[0];
+        const JWTToken = await getJWT(user_id, firstName, lastName, userEmail);
         return res.status(200).json({
-            user_id,
+            success: 'Welcome to my app',
+            userId: user_id,
+            token: JWTToken,
         });
     } catch (err) {
         return res.status(422).json({
@@ -69,3 +73,20 @@ router.post('/signup', validatorSignUp, async (req, res) => {
 });
 
 module.exports = router;
+
+function getJWT(userId, firstName, lastName, userEmail) {
+    const secret = process.env.SECRET;
+    const expires = +process.env.EXPIRES;
+    return jwt.sign(
+        {
+            userId,
+            userEmail,
+            firstName,
+            lastName,
+        },
+        secret,
+        {
+            expiresIn: expires,
+        },
+    );
+}
