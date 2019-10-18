@@ -1,11 +1,11 @@
 const express = require('express');
 
-const apiSingUp = require('../controllers/users/singUp.controller');
-const apiSingIn = require('../controllers/users/singIn.controller');
+const apiSignUp = require('../controllers/users/signUp.controller');
+const apiSignIn = require('../controllers/users/signIn.controller');
 
 const router = express.Router();
 
-router.use('/users', apiSingUp);
-router.use('/users', apiSingIn);
+router.use('/users', apiSignUp);
+router.use('/users', apiSignIn);
 
 module.exports = router;
