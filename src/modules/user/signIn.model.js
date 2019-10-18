@@ -1,4 +1,4 @@
-class SingIn {
+class SignIn {
     constructor(email) {
         this.userEmail = email;
     }
@@ -9,4 +9,4 @@ class SingIn {
     }
 }
 
-module.exports = SingIn;
+module.exports = SignIn;

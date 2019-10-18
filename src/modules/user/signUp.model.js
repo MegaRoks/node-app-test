@@ -1,4 +1,4 @@
-class SingUp {
+class SignUp {
     constructor(firstName, lastName, userEmail, password, createDate) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,4 +19,4 @@ class SingUp {
     }
 }
 
-module.exports = SingUp;
+module.exports = SignUp;

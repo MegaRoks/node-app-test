@@ -4,7 +4,7 @@ const { check, validationResult } = require('express-validator');
 const moment = require('moment');
 
 const db = require('./../../db');
-const SingUp = require('./../../modules/user/singUp.model');
+const SignUp = require('../../modules/user/signUp.model');
 
 const router = express.Router();
 
@@ -52,12 +52,12 @@ router.post('/signup', validatorSignUp, async (req, res) => {
         const salt = +process.env.SALT;
         const password = await bcrypt.hash(userPassword, salt);
         const createDate = moment().format();
-        const singUp = new SingUp(firstName, lastName, userEmail, password, createDate);
-        const { user_exists } = (await db.query(singUp.getUserByEmail())).rows[0];
+        const signUp = new SignUp(firstName, lastName, userEmail, password, createDate);
+        const { user_exists } = (await db.query(signUp.getUserByEmail())).rows[0];
         if (user_exists) {
             throw new Error('A user with that email address already exists.');
         }
-        const { user_id } = (await db.query(singUp.addUser())).rows[0];
+        const { user_id } = (await db.query(signUp.addUser())).rows[0];
         return res.status(200).json({
             user_id,
         });
