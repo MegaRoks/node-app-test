@@ -11,10 +11,10 @@ const router = express.Router();
 router.delete('/delete', async (req, res) => {
     try {
         const { userId } = getDecodedToken(req.headers.token);
-        const { file_name } = req.body;
-        const deleteFile = new DeleteFile(file_name, userId);
-        const { file_exists } = (await db.query(deleteFile.getFileByFileName())).rows[0];
-        if (!file_exists) {
+        const { fileId } = req.body;
+        const deleteFile = new DeleteFile(fileId, userId);
+        const { file_name } = (await db.query(deleteFile.getFileById())).rows[0];
+        if (!file_name) {
             throw new Error('A file with the same name does not exist.');
         }
         const { file_id } = (await db.query(deleteFile.deleteFile())).rows[0];

@@ -1,16 +1,16 @@
 class DeleteFile {
-    constructor(fileName, userId) {
-        this.fileName = fileName;
+    constructor(fileId, userId) {
+        this.fileId = fileId;
         this.userId = userId;
     }
 
     deleteFile() {
-        const sql = `DELETE FROM FILES WHERE FILE_NAME = '${this.fileName}' AND USER_ID = '${this.userId}' RETURNING FILE_ID`;
+        const sql = `DELETE FROM FILES WHERE FILE_NAME = '${this.fileId}' AND USER_ID = '${this.userId}' RETURNING FILE_ID`;
         return sql;
     }
 
-    getFileByFileName() {
-        const sql = `SELECT EXISTS(SELECT F.FILE_ID FROM FILES AS F WHERE F.FILE_NAME = '${this.fileName}') AS FILE_EXISTS`;
+    getFileById() {
+        const sql = `SELECT F.FILE_NAME FROM FILES AS F WHERE F.FILE_ID = '${this.fileId}'`;
         return sql;
     }
 }
