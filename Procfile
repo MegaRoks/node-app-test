@@ -1,1 +1,1 @@
-web: npm run sevre
+web: node ./src/index.js
