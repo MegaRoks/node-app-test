@@ -5,7 +5,7 @@ class DeleteFile {
     }
 
     deleteFile() {
-        const sql = `DELETE FROM FILES WHERE FILE_NAME = '${this.fileId}' AND USER_ID = '${this.userId}' RETURNING FILE_ID`;
+        const sql = `DELETE FROM FILES WHERE FILE_ID = '${this.fileId}' AND USER_ID = '${this.userId}' RETURNING FILE_ID`;
         return sql;
     }
 
