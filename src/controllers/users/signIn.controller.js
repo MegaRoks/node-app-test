@@ -4,7 +4,7 @@ const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 
 const db = require('./../../db');
-const SignIn = require('../../modules/user/SignIn.model');
+const SignIn = require('../../modules/user/signIn.model');
 
 const router = express.Router();
 
