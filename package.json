@@ -25,6 +25,7 @@
     },
     "scripts": {
         "start": "SET NODE_ENV=development && nodemon --inspect src/index.js",
+        "serve": "NODE_ENV=development && src/index.js",
         "test": "SET NODE_ENV=test && mocha -exit --timeout 10000"
     },
     "repository": {
