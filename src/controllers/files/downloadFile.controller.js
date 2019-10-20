@@ -11,7 +11,7 @@ router.get('/download/:url_code/', async (req, res) => {
         const { url_code } = req.params;
         const downloadFile = new DownloadFile(url_code);
         const { file_name } = (await db.query(downloadFile.getFileByUrlCode())).rows[0];
-        db.query(downloadFile.updateCountDownload());
+        await db.query(downloadFile.updateCountDownload());
         const file = `${__dirname}/../../../storage/${file_name}`;
         res.download(file);
     } catch (err) {

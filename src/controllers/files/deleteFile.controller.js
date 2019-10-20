@@ -17,12 +17,11 @@ router.delete('/delete', async (req, res) => {
         if (!file) {
             throw new Error('A file with the same name does not exist.');
         }
-        const { file_id } = (await db.query(deleteFile.deleteFile())).rows[0];
+        await db.query(deleteFile.deleteFile());
         const fileFath = `${__dirname}/../../../storage/${file.file_name}`;
         fs.unlinkSync(fileFath);
         return res.status(200).json({
             message: `File named as ${file.file_name} has been deleted`,
-            file_id,
         });
     } catch (err) {
         return res.status(422).json({
