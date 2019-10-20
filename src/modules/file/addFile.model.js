@@ -9,12 +9,12 @@ class File {
 
     addFile() {
         const sql = `INSERT INTO FILES(FILE_NAME, FILE_PATH, USER_ID, URL_CODE, CREATE_DATE) VALUES(
-            '${this.fileName}', '${this.filePath}', '${this.userId}',  '${this.urlCode}', '${this.createDate}') RETURNING FILE_ID`;
+            '${this.fileName}', '${this.filePath}', '${this.userId}', '${this.urlCode}', '${this.createDate}') RETURNING FILE_ID`;
         return sql;
     }
 
     getFileByFileName() {
-        const sql = `SELECT EXISTS(SELECT F.FILE_ID FROM FILES AS F WHERE F.FILE_NAME = '${this.fileName}') AS FILE_EXISTS`;
+        const sql = `SELECT EXISTS(SELECT F.FILE_ID FROM FILES AS F WHERE F.FILE_NAME = '${this.fileName}' AND F.USER_ID = '${this.userId}') AS FILE_EXISTS`;
         return sql;
     }
 }
