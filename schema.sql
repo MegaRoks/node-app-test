@@ -1,7 +1,7 @@
 --
 -- users table
 --
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users(
     user_id 						    SERIAL PRIMARY KEY, 
     first_name                          VARCHAR(220) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE users(
 --
 -- users table
 --
-DROP TABLE IF EXISTS files;
+DROP TABLE IF EXISTS files CASCADE;
 CREATE TABLE files(
     file_id 						    SERIAL PRIMARY KEY, 
     file_name                           VARCHAR(220) NOT NULL, 

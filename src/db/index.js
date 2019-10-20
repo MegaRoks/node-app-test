@@ -1,21 +1,16 @@
 const { Pool } = require('pg');
 
-let databaseName;
+let connectionString;
 
 if (process.env.NODE_ENV.trim() === 'development') {
-    databaseName = process.env.DEV_PG_DATABASE;
+    connectionString = process.env.DEV_URL_DB;
 } else if (process.env.NODE_ENV.trim() === 'production') {
-    databaseName = process.env.PROD_PG_DATABASE;
-} else if (process.env.NODE_ENV.trim() === 'test') {
-    databaseName = process.env.TEST_PG_DATABASE;
+    connectionString = process.env.TEST_URL_DB;
 }
 
 const pool = new Pool({
-    user: process.env.PG_USER,
-    host: process.env.PG_HOST,
-    database: databaseName,
-    password: process.env.PG_PASSWORD,
-    port: +process.env.PG_PORT,
+    connectionString,
+    ssl: true,
 });
 
 module.exports = pool;
