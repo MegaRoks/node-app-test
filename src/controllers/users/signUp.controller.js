@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 
-const { Users } = require('./../../db/models');
+const { Users } = require('./../../models');
 
 const router = express.Router();
 
@@ -51,7 +51,7 @@ router.post('/signup', validatorSignUp, async (req, res) => {
         const salt = +process.env.SALT;
         const password = await bcrypt.hash(userPassword, salt);
         const user = (await Users.findAll({ where: { user_email: userEmail } }))[0];
-        if (user.length > 0) {
+        if (user) {
             throw new Error('A user with that email address already exists.');
         }
         const { user_id } = await Users.create({

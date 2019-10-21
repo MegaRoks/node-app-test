@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const shortid = require('shortid');
 
-const { Files } = require('./../../db/models');
+const { Files } = require('./../../models');
 const upload = require('../../config/multer.config');
 
 const router = express.Router();

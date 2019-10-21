@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Files } = require('./../../db/models');
+const { Files } = require('./../../models');
 
 const router = express.Router();
 

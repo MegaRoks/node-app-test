@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 
-const { Files } = require('./../../db/models');
+const { Files } = require('./../../models');
 
 const router = express.Router();
 
