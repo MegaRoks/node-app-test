@@ -1,7 +1,6 @@
 const express = require('express');
 
-const db = require('../../db');
-const DownloadFile = require('../../modules/file/downloadFile.model');
+const { Files } = require('./../../models');
 
 const router = express.Router();
 
@@ -9,9 +8,8 @@ const router = express.Router();
 router.get('/download/:url_code/', async (req, res) => {
     try {
         const { url_code } = req.params;
-        const downloadFile = new DownloadFile(url_code);
-        const { file_name } = (await db.query(downloadFile.getFileByUrlCode())).rows[0];
-        await db.query(downloadFile.updateCountDownload());
+        const { file_name } = (await Files.findAll({ where: { url_code } }))[0];
+        await Files.increment('count_downloads', { where: { url_code } });
         const file = `${__dirname}/../../../storage/${file_name}`;
         res.download(file);
     } catch (err) {

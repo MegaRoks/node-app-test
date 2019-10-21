@@ -3,8 +3,7 @@ const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 
-const db = require('./../../db');
-const SignIn = require('../../modules/user/signIn.model');
+const { Users } = require('./../../models');
 
 const router = express.Router();
 
@@ -33,8 +32,7 @@ router.post('/signin', validatorSignIn, async (req, res) => {
             throw new Error(errors[0].msg);
         }
         const { userEmail, userPassword } = req.body;
-        const signIn = new SignIn(userEmail);
-        const user = (await db.query(signIn.getUserByEmail())).rows[0];
+        const user = (await Users.findAll({ where: { user_email: userEmail } }))[0];
         if (!user) {
             throw new Error('A user with that email address already exists.');
         }
@@ -42,7 +40,7 @@ router.post('/signin', validatorSignIn, async (req, res) => {
         if (!result) {
             throw new Error('Wrong email, username or password');
         }
-        const JWTToken = await getJWT(user);
+        const JWTToken = getJWT(user);
         return res.status(200).json({
             success: 'Welcome to my app',
             token: JWTToken,

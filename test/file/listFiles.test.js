@@ -26,7 +26,6 @@ describe('List files', () => {
                     expect(element.user_id).to.be.an('number');
                     expect(element.url_code).to.be.an('string');
                     expect(element.count_downloads).to.be.an('number');
-                    expect(element.create_date).to.be.an('string');
                 });
                 done();
             });

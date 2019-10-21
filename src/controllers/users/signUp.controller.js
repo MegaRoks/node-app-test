@@ -2,10 +2,8 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
-const moment = require('moment');
 
-const db = require('./../../db');
-const SignUp = require('../../modules/user/signUp.model');
+const { Users } = require('./../../models');
 
 const router = express.Router();
 
@@ -52,14 +50,17 @@ router.post('/signup', validatorSignUp, async (req, res) => {
         const { firstName, lastName, userEmail, userPassword } = req.body;
         const salt = +process.env.SALT;
         const password = await bcrypt.hash(userPassword, salt);
-        const createDate = moment().format();
-        const signUp = new SignUp(firstName, lastName, userEmail, password, createDate);
-        const { user_exists } = (await db.query(signUp.getUserByEmail())).rows[0];
-        if (user_exists) {
+        const user = (await Users.findAll({ where: { user_email: userEmail } }))[0];
+        if (user) {
             throw new Error('A user with that email address already exists.');
         }
-        const { user_id } = (await db.query(signUp.addUser())).rows[0];
-        const JWTToken = await getJWT(user_id, firstName, lastName, userEmail);
+        const { user_id } = await Users.create({
+            first_name: firstName,
+            last_name: lastName,
+            user_email: userEmail,
+            user_password: password,
+        });
+        const JWTToken = getJWT(user_id, firstName, lastName, userEmail);
         return res.status(200).json({
             success: 'Welcome to my app',
             userId: user_id,
