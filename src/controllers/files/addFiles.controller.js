@@ -16,7 +16,6 @@ router.post('/add', upload, async (req, res) => {
         const createDate = moment().format();
         const { filename, path } = req.file;
         const urlCode = shortid.generate();
-        const shortUrl = `${req.protocol}://${req.get('host')}/${urlCode}`;
         const file = new File(filename, path, userId, urlCode, createDate);
         const { file_exists } = (await db.query(file.getFileByFileName())).rows[0];
         if (file_exists) {
@@ -26,7 +25,7 @@ router.post('/add', upload, async (req, res) => {
         return res.status(200).json({
             message: `File named as ${filename} has been uploaded`,
             file_id,
-            shortUrl,
+            urlCode,
         });
     } catch (err) {
         return res.status(422).json({
