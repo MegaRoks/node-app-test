@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 const moment = require('moment');
 
-const db = require('./../../db');
+const db = require('../../db/models');
 const SignUp = require('../../modules/user/signUp.model');
 
 const router = express.Router();

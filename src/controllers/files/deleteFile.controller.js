@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 
-const db = require('../../db');
+const db = require('../../db/models');
 const DeleteFile = require('../../modules/file/deleteFile.model');
 
 const router = express.Router();

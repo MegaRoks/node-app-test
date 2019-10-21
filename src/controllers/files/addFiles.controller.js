@@ -3,7 +3,7 @@ const moment = require('moment');
 const jwt = require('jsonwebtoken');
 const shortid = require('shortid');
 
-const db = require('../../db');
+const db = require('../../db/models');
 const File = require('../../modules/file/addFile.model');
 const upload = require('../../config/multer.config');
 
