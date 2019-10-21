@@ -35,13 +35,6 @@ module.exports = (sequelize, DataTypes) => {
                     args: false,
                     msg: 'Please enter your password',
                 },
-                validate: {
-                    isNotShort: value => {
-                        if (value.length < 6) {
-                            throw new Error('Password should be at least 8 characters');
-                        }
-                    },
-                },
             },
         },
         {},
