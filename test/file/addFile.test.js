@@ -26,8 +26,8 @@ describe('Add file', () => {
                 expect(res.body.message).to.be.an('string');
                 expect(res.body).have.property('file_id');
                 expect(res.body.file_id).to.be.an('number');
-                expect(res.body).have.property('shortUrl');
-                expect(res.body.shortUrl).to.be.an('string');
+                expect(res.body).have.property('urlCode');
+                expect(res.body.urlCode).to.be.an('string');
                 done();
             });
     });

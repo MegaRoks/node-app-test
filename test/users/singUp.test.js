@@ -2,17 +2,12 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 
 const server = require('../../src/index');
-const db = require('./../../src/db/index');
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
 describe('Sing Up', () => {
-    beforeEach(() => {
-        db.query('TRUNCATE USERS CASCADE', null);
-    });
-
     describe('POST /api/users/signup/', () => {
         it('Should receive an error message that the first name is required', done => {
             chai.request(server)

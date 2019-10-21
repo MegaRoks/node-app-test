@@ -8,4 +8,11 @@ module.exports = {
             ssl: true,
         },
     },
+    test: {
+        url: process.env.TEST_URL_DB,
+        dialect: 'postgres',
+        dialectOptions: {
+            ssl: true,
+        },
+    },
 };
