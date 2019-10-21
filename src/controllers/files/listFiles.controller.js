@@ -1,17 +1,15 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 
-const db = require('../../db/models');
-const ListFile = require('../../modules/file/list.model');
+const { Files } = require('./../../db/models');
 
 const router = express.Router();
 
 // handles url http://localhost:8081/files/list/
 router.get('/list', async (req, res) => {
     try {
-        const { userId } = await getDecodedToken(req.headers.token);
-        const listFile = new ListFile(userId);
-        const filesList = (await db.query(listFile.getFilesByUserID())).rows;
+        const { userId } = getDecodedToken(req.headers.token);
+        const filesList = await Files.findAll({ where: { user_id: userId } });
         return res.status(200).json({
             filesList,
         });

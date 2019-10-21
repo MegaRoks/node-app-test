@@ -8,23 +8,24 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
             file_name: {
-				allowNull: false,
+                allowNull: false,
                 type: Sequelize.STRING,
             },
             file_path: {
-				allowNull: false,
+                allowNull: false,
                 type: Sequelize.STRING,
             },
             user_id: {
-				allowNull: false,
+                allowNull: false,
                 type: Sequelize.INTEGER,
             },
             url_code: {
-				allowNull: false,
+                allowNull: false,
                 type: Sequelize.STRING,
             },
             count_downloads: {
-				allowNull: false,
+                allowNull: false,
+                defaultValue: 0,
                 type: Sequelize.INTEGER,
             },
             createdAt: {

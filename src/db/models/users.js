@@ -9,32 +9,32 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
             },
             first_name: {
-                type: DataTypes.STRING,
                 allowNull: {
                     args: false,
                     msg: 'Please enter your first name',
                 },
+                type: DataTypes.STRING,
             },
             last_name: {
-                type: DataTypes.STRING,
                 allowNull: {
                     args: false,
                     msg: 'Please enter your last name',
                 },
+                type: DataTypes.STRING,
             },
             user_email: {
-                type: DataTypes.STRING,
                 allowNull: {
                     args: false,
                     msg: 'Please enter your email',
                 },
+                type: DataTypes.STRING,
             },
             user_password: {
-                type: DataTypes.STRING,
                 allowNull: {
                     args: false,
                     msg: 'Please enter your password',
                 },
+                type: DataTypes.STRING,
             },
         },
         {},

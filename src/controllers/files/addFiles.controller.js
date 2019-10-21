@@ -1,10 +1,8 @@
 const express = require('express');
-const moment = require('moment');
 const jwt = require('jsonwebtoken');
 const shortid = require('shortid');
 
-const db = require('../../db/models');
-const File = require('../../modules/file/addFile.model');
+const { Files } = require('./../../db/models');
 const upload = require('../../config/multer.config');
 
 const router = express.Router();
@@ -13,20 +11,22 @@ const router = express.Router();
 router.post('/add', upload, async (req, res) => {
     try {
         const { userId } = getDecodedToken(req.headers.token);
-        const createDate = moment().format();
         const { filename, path } = req.file;
         const urlCode = shortid.generate();
-        const shortUrl = `${req.protocol}://${req.get('host')}/${urlCode}`;
-        const file = new File(filename, path, userId, urlCode, createDate);
-        const { file_exists } = (await db.query(file.getFileByFileName())).rows[0];
-        if (file_exists) {
+        const file = (await Files.findAll({ where: { file_name: filename } }))[0];
+        if (file) {
             throw new Error('A file with the same name already exists.');
         }
-        const { file_id } = (await db.query(file.addFile())).rows[0];
+        const { file_id } = await Files.create({
+            file_name: filename,
+            file_path: path,
+            user_id: userId,
+            url_code: urlCode,
+        });
         return res.status(200).json({
             message: `File named as ${filename} has been uploaded`,
             file_id,
-            shortUrl,
+            urlCode,
         });
     } catch (err) {
         return res.status(422).json({

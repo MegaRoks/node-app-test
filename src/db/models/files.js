@@ -10,18 +10,18 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
             },
             file_name: {
-                type: DataTypes.STRING,
                 allowNull: {
                     args: false,
                     msg: 'Please enter your file name',
                 },
+                type: DataTypes.STRING,
             },
             file_path: {
-                type: DataTypes.STRING,
                 allowNull: {
                     args: false,
                     msg: 'Please enter your first path',
                 },
+                type: DataTypes.STRING,
             },
             user_id: {
                 type: DataTypes.STRING,
@@ -32,14 +32,15 @@ module.exports = (sequelize, DataTypes) => {
                 },
             },
             url_code: {
-                type: DataTypes.STRING,
                 allowNull: {
                     args: false,
                     msg: 'Please enter your url code',
                 },
+                type: DataTypes.STRING,
             },
             count_downloads: {
                 type: DataTypes.STRING,
+                defaultValue: 0,
             },
         },
         {},

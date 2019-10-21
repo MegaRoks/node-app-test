@@ -1,7 +1,6 @@
 const express = require('express');
 
-const db = require('../../db/models');
-const GetFile = require('../../modules/file/getFile.model');
+const { Files } = require('./../../db/models');
 
 const router = express.Router();
 
@@ -9,14 +8,12 @@ const router = express.Router();
 router.get('/:url_code', async (req, res) => {
     try {
         const { url_code } = req.params;
-        const getFile = new GetFile(url_code);
-        const { file_exists } = (await db.query(getFile.checkFileByUrlCode())).rows[0];
-        if (!file_exists) {
+        const file = (await Files.findAll({ where: { url_code } }))[0];
+        if (!file) {
             throw new Error('A file with the same name does not exist.');
         }
-        const fileDetails = (await db.query(getFile.getFileByUrlCode())).rows[0];
         return res.status(200).json({
-            fileDetails,
+            file,
         });
     } catch (err) {
         return res.status(422).json({
