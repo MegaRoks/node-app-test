@@ -26,7 +26,8 @@
     },
     "scripts": {
         "start": "SET NODE_ENV=development && nodemon --inspect src/index.js",
-        "test": "SET NODE_ENV=test && mocha -exit --timeout 10000"
+        "test": "SET NODE_ENV=test && mocha -exit --timeout 10000",
+        "migrate": "npx sequelize-cli db:migrate"
     },
     "repository": {
         "type": "git",
