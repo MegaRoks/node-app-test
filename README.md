@@ -1,10 +1,10 @@
 # node-app-test
 
-Collection of postman^
+Collection of postman:
 
 https://www.getpostman.com/collections/17b0b596f3001e757909
 
-Create .env file
+Create .env file:
 
 ```
 PORT=***
